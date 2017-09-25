@@ -1,3 +1,5 @@
+# packs
 */**/files/*
 
+# Ansible retry files
 */**/*.retry
