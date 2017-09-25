@@ -1,42 +1,43 @@
 ---
-  Name: Install WSO2 EI BPS 6.1.1
-  # Hosts: localhost
-  become: false
+  -
+    name: Install WSO2 EI BPS 6.1.1
+    hosts: test
+    become: false
 
-  # Environment variables
-  environment:
-    CARBON_HOME: {{ setup_path }}/wso2ei-6.1.1/wso2/business-process
-    JAVA_HOME: {{ setup_path }}/jdk1.8.0_77
+    # Environment variables
+    environment:
+      CARBON_HOME: "{{ setup_path }}/wso2ei-6.1.1/wso2/business-process"
+      JAVA_HOME: "{{ setup_path }}/jdk1.8.0_77"
 
-  # Task list
-  tasks:
-    # -
-      # name: Test install stuff
-      # apt:
-      #   name: postgres-client
-      #   state: present
-    -
-      name: Copy pack
-      copy:
-        src: files/wso2ei-6.1.1.zip
-        dest: {{ setup_path }}/
-    -
-      name: Unzip pack
-      command: unzip {{ setup_path }}/wso2ei-6.1.1.zip -d {{ setup_path }}
-    # -
-    #   name: Set CARBON_HOME
-    -
-      name: Copy JDK
-      copy:
-        src: files/jdk-8u131-linux-x64.tar.gz
-        dest: {{ setup_path }}/
-    -
-      name: Untar JDK
-      comand: tar zxvf jdk-8u131-linux-x64.tar.gz -P {{ setup_path }}
-    # -
-    #   name: Set JAVA_HOME
-    # -
-    #   name: Update PATH
-    -
-      name: Start WSO2 EI BPS Server
-      command: nohup sh {{ setup_path }}/wso2ei-6.1.1/bin/business-process.sh > /dev/null 2>&1 &
+    # Task list
+    tasks:
+      # -
+        # name: Test install stuff
+        # apt:
+        #   name: postgres-client
+        #   state: present
+      -
+        name: Copy pack
+        copy:
+          src: files/wso2ei-6.1.1.zip
+          dest: "{{ setup_path }}/"
+      -
+        name: Unzip pack
+        command: "unzip {{ setup_path }}/wso2ei-6.1.1.zip -d {{ setup_path }}"
+      # -
+      #   name: Set CARBON_HOME
+      -
+        name: Copy JDK
+        copy:
+          src: files/jdk-8u131-linux-x64.tar.gz
+          dest: "{{ setup_path }}/"
+      -
+        name: Untar JDK
+        command: "tar zxvf jdk-8u131-linux-x64.tar.gz -P {{ setup_path }}"
+      # -
+      #   name: Set JAVA_HOME
+      # -
+      #   name: Update PATH
+      -
+        name: Start WSO2 EI BPS Server
+        command: "nohup sh {{ setup_path }}/wso2ei-6.1.1/bin/business-process.sh > /dev/null 2>&1 &"
