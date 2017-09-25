@@ -6,8 +6,7 @@
 
     # Environment variables
     environment:
-      # CARBON_HOME: "{{ setup_path }}/wso2ei-6.1.1/wso2/business-process"
-      JAVA_HOME: "{{ setup_path }}/jdk1.8.0_131"
+      JAVA_HOME: "{{ setup_path }}/jdk1.8.0_{{ jdk8_patch_version|quote }}"
 
     # Task list
     tasks:
@@ -19,6 +18,7 @@
       -
         name: Copy pack
         copy:
+          # Symbolic links work
           src: files/wso2ei-6.1.1.zip
           dest: "{{ setup_path }}/"
       -
@@ -29,12 +29,12 @@
       -
         name: Copy JDK
         copy:
-          src: "files/jdk-8u131-linux-x64.tar.gz"
+          src: "files/jdk-8u{{ jdk8_patch_version|quote }}-linux-x64.tar.gz"
           dest: "{{ setup_path }}/"
       -
         name: Untar JDK
         unarchive:
-          src: "{{ setup_path }}/jdk-8u131-linux-x64.tar.gz"
+          src: "{{ setup_path }}/jdk-8u{{ jdk8_patch_version|quote }}-linux-x64.tar.gz"
           dest: "{{ setup_path }}"
       -
         name: Start WSO2 EI BPS Server
