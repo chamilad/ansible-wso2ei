@@ -1,5 +1,7 @@
 # WSO2 Ansible Playbooks
 
+> This is my personal effort on getting started with Ansible. This is NOT an official WSO2 provided Playbook.
+
 WSO2 Ansible Playbooks provide Ansible artifacts that can be used to configure WSO2 products.
 
 # TODO

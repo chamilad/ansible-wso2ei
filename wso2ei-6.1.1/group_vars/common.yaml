@@ -1,0 +1,2 @@
+# Hostname to be used in the Carbon configurations
+ei_hostname: "ei-group-integrator.local"

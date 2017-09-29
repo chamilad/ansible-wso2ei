@@ -4,6 +4,9 @@
     hosts: test
     become: false
 
+    vars:
+      ei_hostname: "ei-integrator.local"
+
     # Environment variables
     environment:
       JAVA_HOME: "{{ setup_path }}/jdk1.8.0_{{ jdk8_patch_version|quote }}"
@@ -37,8 +40,13 @@
           src: "{{ setup_path }}/jdk-8u{{ jdk8_patch_version|quote }}-linux-x64.tar.gz"
           dest: "{{ setup_path }}"
       -
+        name: Configure hostnames
+        template:
+          src: templates/conf/carbon.xml.j2
+          dest: "{{ setup_path }}/wso2ei-6.1.1/conf/carbon.xml"
+      -
         name: Start WSO2 EI BPS Server
-        shell: "bash business-process.sh &"
+        shell: "bash integrator.sh &"
         args:
           chdir: "{{ setup_path }}/wso2ei-6.1.1/bin/"
           executable: "/bin/bash"
